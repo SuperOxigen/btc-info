@@ -72,6 +72,7 @@ AllowShortLoopsOnASingleLine: true
 # Return type should always be on the same line as the function
 # label.
 AlwaysBreakAfterReturnType: None
+PenaltyReturnTypeOnItsOwnLine: 10000
 # Do not re-intend multi line strings.
 AlwaysBreakBeforeMultilineStrings: false
 # Template declaration statements should always be on their own lines.

@@ -67,12 +67,27 @@ $(OBJ_DIR)/btc.log.o: lib/btc/src/log.c lib/btc/log.h
 
 CORE_OBJS += $(OBJ_DIR)/btc.log.o
 
+# Encoders
+
 $(OBJ_DIR)/btc.encode.hex.o: lib/btc/encode/src/hex.cpp lib/btc/encode/hex.hpp
 	@echo "[ CX ] $@"
 	@mkdir -p $(OBJ_DIR)
 	@$(CPP_CC) $(CPP_FLAGS) -o $@ -c lib/btc/encode/src/hex.cpp
 
 CORE_OBJS += $(OBJ_DIR)/btc.encode.hex.o
+
+# Cryptography
+
+$(OBJ_DIR)/btc.crypto.digest.o: lib/btc/crypto/src/digest.cpp lib/btc/crypto/src/digest.openssl.cpp lib/btc/crypto/digest.hpp
+	@mkdir -p $(OBJ_DIR)
+	@echo "[ CX ] $(OBJ_DIR)/btc.crypto.digest.openssl.o"
+	@$(CPP_CC) $(CPP_FLAGS) -o $(OBJ_DIR)/btc.crypto.digest.openssl.o -c lib/btc/crypto/src/digest.openssl.cpp
+	@echo "[ CX ] $(OBJ_DIR)/btc.crypto.digest.common.o"
+	@$(CPP_CC) $(CPP_FLAGS) -o $(OBJ_DIR)/btc.crypto.digest.common.o -c lib/btc/crypto/src/digest.cpp
+	@echo "[ LD ] $@"
+	@ld -relocatable $(OBJ_DIR)/btc.crypto.digest.*.o -o $@
+
+CORE_OBJS += $(OBJ_DIR)/btc.crypto.digest.o
 
 # == Core Library ==
 
