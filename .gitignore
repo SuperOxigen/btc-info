@@ -1,32 +1,66 @@
+##
+#  C/C++ Gitignore
+##
+
+# Build Director
+/build
+/out
+
 # Prerequisites
 *.d
 
-# Compiled Object files
-*.slo
-*.lo
+# Object files
+*.elf
+*.ko
 *.o
 *.obj
+
+# Linker output
+*.exp
+*.ilk
+*.map
 
 # Precompiled Headers
 *.gch
 *.pch
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
+# Libraries
+*.a
+*.la
+*.lai
+*.lib
+*.lo
+
+# Shared objects (inc. Windows DLLs)
 *.dll
+*.dylib
+*.slo
+*.so
+*.so.*
+
+# Executables
+*.app
+*.exe
+*.hex
+*.i*86
+*.out
+*.x86_64
+
+# Debug files
+*.dSYM/
+*.idb
+*.pdb
+*.su
+
+# Kernel Module Compile Results
+*.cmd
+*.mod*
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
 
 # Fortran module files
 *.mod
 *.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app

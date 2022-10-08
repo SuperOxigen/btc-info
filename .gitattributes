@@ -1,0 +1,7 @@
+# Correct Line Endings
+*           text=auto
+*.sh        text eol=lf
+*.pdf       -text
+
+*.{h,c}     linguist-language=C
+*.{hpp,cpp} linguist-language=C++

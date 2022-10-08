@@ -1,0 +1,301 @@
+# BTC Info - Project C/C++ Format File
+#
+# These rules are set based on preference, and are to help maintain
+# code style consistency.
+
+BasedOnStyle: LLVM
+
+---
+Language: Cpp
+Standard: c++17
+
+# Do not derive line ending, they should always be \n
+DeriveLineEnding: false
+UseCRLF: false
+
+# == Indentations and Space Alignments ==
+
+# 2 space indentation
+IndentWidth: 2
+# Lines should be 80 characters or less.
+ColumnLimit: 80
+# Always use spaces instead of tabs.
+UseTab: Never
+
+
+# Always put function parameters on a new line if they cannot fit
+# on the same line.
+AlignAfterOpenBracket: AlwaysBreak
+# Do not align groups of variable declarations + assignments.
+AlignConsecutiveAssignments: false
+# Bitfield specifications should be aligned across comments, but
+# not empty lines.
+AlignConsecutiveBitFields: true
+# Do not align variable names when declared in succession.
+AlignConsecutiveDeclarations: false
+# Do not align consecutive macros.  (May change)
+AlignConsecutiveMacros: false
+# Multi-line macros should have the newline escapes aligned.
+AlignEscapedNewlines: Left
+# Align multi lined arithmetic expressions after the assignment
+# operator.  (might remove)
+AlignOperands: AlignAfterOperator
+# Align inlined comments when grouped.
+AlignTrailingComments: true
+# Always put function arguments on a new line if they cannot fit
+# on the same line.  Also see BinPackArguments
+AllowAllArgumentsOnNextLine: true
+# Always put constructor member initializer on a new line if they
+# cannot fit on the same line.
+# Also see ConstructorInitializerAllOnOneLineOrOnePerLine
+AllowAllConstructorInitializersOnNextLine: true
+# Always put function parameters on a new line if they cannot fit
+# on the same line.
+AllowAllParametersOfDeclarationOnNextLine: true
+# Always make empty blocks on a single line.  All others are at
+# developer's discretion.
+AllowShortBlocksOnASingleLine: Empty
+# Case statements must always have their action on another line.
+AllowShortCaseLabelsOnASingleLine: false
+# Enum values should have their labels on their own line, however,
+# setting this option false does not work well with C enums.
+AllowShortEnumsOnASingleLine: true
+# Always inline empty function blocks or short inline class methods.
+AllowShortFunctionsOnASingleLine: Inline
+# Always put single line if statement without braces on the same
+# line.
+AllowShortIfStatementsOnASingleLine: Always
+# Only inline empty lambda statements.
+AllowShortLambdasOnASingleLine: Empty
+# Single statement while loops may be inlined.
+AllowShortLoopsOnASingleLine: true
+# Return type should always be on the same line as the function
+# label.
+AlwaysBreakAfterReturnType: None
+# Do not re-intend multi line strings.
+AlwaysBreakBeforeMultilineStrings: false
+# Template declaration statements should always be on their own lines.
+AlwaysBreakTemplateDeclarations: Yes
+# Allow multiple function arguments on the same line, even if all
+# arguments are across multiple lines.
+BinPackArguments: true
+# Allow multiple function parameters on the same line, even if all
+# parameters are across multiple lines.
+BinPackParameters: true
+# Custom brace breaking.
+# In general, all opening blocks should be on the same line as the
+# statement opener.
+BreakBeforeBraces: Custom
+BraceWrapping:
+  # Cases with code blocks
+  AfterCaseLabel: false
+  # Class defintions (this might be incorrectly documented)
+  AfterClass: false
+  # if/for/while/switch
+  AfterControlStatement: Never
+  # Enum definitions
+  AfterEnum: false
+  # Function definitions
+  AfterFunction: false
+  # Namespace definitions
+  AfterNamespace: false
+  # Struct definitions
+  AfterStruct: false
+  # Union definitions
+  AfterUnion: false
+  # Extern "C" blcok
+  AfterExternBlock: false
+  # The catch part of try-catch should be cuddled
+  BeforeCatch: false
+  # The else part of an if-else should be cuddled
+  BeforeElse: false
+  # Lambda function block.
+  BeforeLambdaBody: false
+  # The while statement of a do-while should be on the same line as
+  # the closed do block.
+  BeforeWhile: false
+  # Should a new block be started, they should not be intented.
+  # Likely will not be used.
+  IndentBraces: false
+  # Empty functions can be inlined
+  SplitEmptyFunction: false
+  # Empty classes/structs can be inlined
+  # May not have an effect due to the other options set.
+  SplitEmptyRecord: false
+  # Do not split empty namespaces.
+  # In general, there should not be any empty namespaces.
+  SplitEmptyNamespace: false
+# Break on line combinations of binary operations except for the
+# assignment operator.
+BreakBeforeBinaryOperators: NonAssignment
+# Always put concept declarations on a new line.  (similar to templates)
+# BreakBeforeConceptDeclarations: true
+# Break on ternary operations, putting the operators at the beginning
+# of the line.
+BreakBeforeTernaryOperators: true
+# If constructor initializers are on a different line, the colon should
+# be on the same line as the constructor parenthesis.
+BreakConstructorInitializers: AfterColon
+# If class inheritance list is too lone to fit on the same line, then
+# the colon should be on the same line as the class label.
+BreakInheritanceList: AfterColon
+# The developer should use their own discretion when using multi-line
+# string literals.  Clang-format will not split strings.
+BreakStringLiterals: false
+# Different namespace openings should be on different lines.
+CompactNamespaces: false
+# For constructor member initializer lists, if they cannot all fit
+# on the same line, even if on a different line as the parameter list,
+# then all variables should be on their own line (similar to how
+# varaible would be declared in a class)
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+# For constructor member initializer lists, should be 2 spaces more tha
+# code in the constructor code block.
+ConstructorInitializerIndentWidth: 4
+# Function calls with arguments being on multiple lines should have an
+# additional intend to distinguish from new blocks.
+ContinuationIndentWidth: 4
+# Braced initializers have minimal spacing, and no extra newlines.
+Cpp11BracedListStyle: true
+# Allow for a single new line before a class member access specifier
+# but only for blocks which contain fields.  Does not effect first
+# specifier.
+# EmptyLineBeforeAccessModifier: LogicalBlock
+# Always include a comment at the closing of a namespace.
+FixNamespaceComments: true
+# Do not intend class member access specifiers.
+# IndentAccessModifiers: false
+# Case blocks should be intended (in addition to label intentation).
+IndentCaseBlocks: true
+# Case labels should be intended.
+IndentCaseLabels: true
+# Do not intend extern "C" blocks.
+IndentExternBlock: NoIndent
+# Do not indent goto labels.  In general, goto labels should only
+# be used for C clean up blocks.
+IndentGotoLabels: false
+# Nested preprocessor directives should be intented.
+IndentPPDirectives: AfterHash
+# C++20 requires statements should be indented.
+# IndentRequires: true
+# If a function and the return type cannot fit on the same line,
+# the function name should not be intented.
+IndentWrappedFunctionNames: false
+# Do not insert trailing common if not needed.
+InsertTrailingCommas: None
+# Code blocks should not have any initial blank lines.
+KeepEmptyLinesAtTheStartOfBlocks: false
+# Blank lines are allowed, but the should not be any more than 1.
+MaxEmptyLinesToKeep: 1
+# Do not indent namespace blocks.
+NamespaceIndentation: None
+# All namespace should include a namespace closing comment.
+# ShortNamespaceLines: 0
+# There should be a space after a C-style cast.
+SpaceAfterCStyleCast: true
+# No space required after a logical not.
+SpaceAfterLogicalNot: false
+# No space between template and template parameter list.
+SpaceAfterTemplateKeyword: false
+# There should always be a space between an assignment operator
+# and the variable being assigned to.
+SpaceBeforeAssignmentOperators: true
+# No space between the case label and the colon.
+# SpaceBeforeCaseColon: false
+# No outer space padding C++ brace lists.
+SpaceBeforeCpp11BracedList: false
+# No space between the constructor and class member intiailizer list
+# colon.
+SpaceBeforeCtorInitializerColon: false
+# No space between the class name and class inheritance list colon.
+SpaceBeforeInheritanceColon: false
+# No space between function and argument parentheses.
+SpaceBeforeParens: ControlStatements
+# There should be a space before ranged loop colons.
+SpaceBeforeRangeBasedForLoopColon: true
+# No space between array variables and the square brackets.
+SpaceBeforeSquareBrackets: false
+# Empty blocks should not have any spaces.
+SpaceInEmptyBlock: false
+# Empty parentheses should not have any spaces.
+SpaceInEmptyParentheses: false
+# Trailing comments should have 2 spaces between the statement and
+# the comment.
+SpacesBeforeTrailingComments: 2
+# No spaces between template arguments and the angle brackets.
+SpacesInAngles: false
+# No spaces between C-style cast parentheses.
+SpacesInCStyleCastParentheses: false
+# No spaces between condition statement parentheses.
+SpacesInConditionalStatement: false
+# Comments must start with atlest 1 space.  Maximum is not enforce.
+#SpacesInLineCommentPrefix:
+#  Minimum: 1
+#  Maximum: -1
+# No spaces in function parentheses.
+SpacesInParentheses: false
+# No spaces in array specifier square parentheses.
+SpacesInSquareBrackets: false
+
+# == Modifier alignment ==
+# Bit field colons should have at least one space before and exactly
+# one space after the colon.
+# BitFieldColonSpacing: Both
+
+# Pointer alignment should never be derived, should always be
+# right-aligned.
+DerivePointerAlignment: false
+PointerAlignment: Right
+# When a pointer qualifier is present, there should be a space on both
+# sides of the qualifier.
+# SpaceAroundPointerQualifiers: Both
+
+# == Include Styles ==
+# Sort headers within the same group alphabetically.  Grouping
+# is left to the developer to specify.
+IncludeBlocks: Preserve
+# Case-insensitive include sorting.
+SortIncludes: true
+
+# == Code Comments ==
+# Length of comments are left to developers to determine.
+ReflowComments: false
+
+# == Other ==
+# Sort C++ using statements.
+SortUsingDeclarations: true
+
+# == Specialization ==
+# List of attribute macros.  See the `ee1up/cc/attr.h` module.
+# AttributeMacros: [
+#   '__UNUSED', '__CONST', '__COLD', '__HOT', '__DEPRECATED', '__PRINTF',
+#   '__ALL_NOT_NULL', '__NOT_NULL', 'C_FUNCTION'
+# ]
+
+# List of known comment pragmas.  None currently used, other than
+# clang-format
+# CommentPragmas:
+
+# Specialized for each macros.  Common in the boost library.
+# ForEachMacros:
+
+# Indicates special macros which start a new block.  Not used.
+# MacroBlockBegin: '^C_SECTION_BEGIN$'
+# MacroBlockEnd: '^C_SECTION_END$'
+
+# Indicates special macros which start a namespace.  Not used.
+# NamespaceMacros:
+
+# List of macros that modify statements.
+# StatementAttributeLikeMacros:
+
+# List of macros that should be treated as a statement.
+# StatementMacros
+
+# List of macros which are known to declare a type.
+# Ex.  OpenSSL's STACK_OF
+TypenameMacros: ['STACK_OF']
+
+# Macros that are whitespace sensitive, and should not be
+# modified by the formatter.
+# WhitespaceSensitiveMacros:
