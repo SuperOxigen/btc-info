@@ -9,7 +9,7 @@
 #include <functional>
 #include <type_traits>
 
-#include "cc/classy.hpp"
+#include "btc/cc/classy.hpp"
 
 namespace btc {
 namespace mem {

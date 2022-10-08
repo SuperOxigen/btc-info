@@ -89,6 +89,13 @@ $(OBJ_DIR)/btc.crypto.digest.o: lib/btc/crypto/src/digest.cpp lib/btc/crypto/src
 
 CORE_OBJS += $(OBJ_DIR)/btc.crypto.digest.o
 
+$(OBJ_DIR)/btc.crypto.ecc_key.o: lib/btc/crypto/src/ecc_key.openssl.cpp lib/btc/crypto/ecc_key.hpp
+	@mkdir -p $(OBJ_DIR)
+	@echo "[ CX ] $(OBJ_DIR)/btc.crypto.ecc_key.o"
+	@$(CPP_CC) $(CPP_FLAGS) -o $(OBJ_DIR)/btc.crypto.ecc_key.o -c lib/btc/crypto/src/ecc_key.openssl.cpp
+
+CORE_OBJS += $(OBJ_DIR)/btc.crypto.ecc_key.o
+
 # == Core Library ==
 
 $(LIB_DIR)/libbtc.a: $(CORE_OBJS)
@@ -114,6 +121,13 @@ $(TEST_OBJ_DIR)/btc.crypto.digest.o: lib/btc/crypto/test/digest.test.cpp lib/btc
 	@$(CPP_CC) $(CPP_FLAGS) -o $@ -c lib/btc/crypto/test/digest.test.cpp
 
 CORE_TEST_OBJS += $(TEST_OBJ_DIR)/btc.crypto.digest.o
+
+$(TEST_OBJ_DIR)/btc.crypto.ecc_key.o: lib/btc/crypto/test/ecc_key.test.cpp lib/btc/crypto/ecc_key.hpp
+	@echo "[ CX ] $@"
+	@mkdir -p $(TEST_OBJ_DIR)
+	@$(CPP_CC) $(CPP_FLAGS) -o $@ -c lib/btc/crypto/test/ecc_key.test.cpp
+
+CORE_TEST_OBJS += $(TEST_OBJ_DIR)/btc.crypto.ecc_key.o
 
 # == Core Test Executable ==
 
