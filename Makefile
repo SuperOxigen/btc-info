@@ -108,6 +108,13 @@ $(TEST_OBJ_DIR)/btc.encode.hex.o: lib/btc/encode/test/hex.test.cpp lib/btc/encod
 
 CORE_TEST_OBJS += $(TEST_OBJ_DIR)/btc.encode.hex.o
 
+$(TEST_OBJ_DIR)/btc.crypto.digest.o: lib/btc/crypto/test/digest.test.cpp lib/btc/crypto/digest.hpp
+	@echo "[ CX ] $@"
+	@mkdir -p $(TEST_OBJ_DIR)
+	@$(CPP_CC) $(CPP_FLAGS) -o $@ -c lib/btc/crypto/test/digest.test.cpp
+
+CORE_TEST_OBJS += $(TEST_OBJ_DIR)/btc.crypto.digest.o
+
 # == Core Test Executable ==
 
 $(BIN_DIR)/btc.test.exe: $(LIB_DIR)/libbtc.a lib/btc/test/main.cpp $(CORE_TEST_OBJS)
