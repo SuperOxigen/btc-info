@@ -35,7 +35,7 @@ INFO_FLAGS := -D_ARCH=$(ARCH) -D_OS=$(OS) -D_BUILD_TIME=$(BUILD_TIME)
 
 DEBUG_FLAGS := -g -D_DEBUG
 RELEASE_FLAGS := -Werror
-COMMON_FLAGS := -Wall -Wextra -mcpu=native -mtune=native $(INFO_FLAGS) -Ilib/
+COMMON_FLAGS := -Wall -Wextra -mcpu=native -mtune=native $(INFO_FLAGS) -Ilib/ -L$(LIB_DIR)
 
 FLAGS := $(DEBUG_FLAGS) $(COMMON_FLAGS)
 
@@ -48,9 +48,9 @@ CPP_FLAGS := -std=c++17 -Weffc++ $(FLAGS)
 
 all: core
 
-core: $(LIB_DIR)/btc.a
+core: $(LIB_DIR)/libbtc.a
 
-test: all
+test: $(BIN_DIR)/btc.test.exe
 
 clean:
 	@echo "[ RM ] $(BUILD_DIR)"
@@ -67,10 +67,35 @@ $(OBJ_DIR)/btc.log.o: lib/btc/src/log.c lib/btc/log.h
 
 CORE_OBJS += $(OBJ_DIR)/btc.log.o
 
+$(OBJ_DIR)/btc.encode.hex.o: lib/btc/encode/src/hex.cpp lib/btc/encode/hex.hpp
+	@echo "[ CX ] $@"
+	@mkdir -p $(OBJ_DIR)
+	@$(CPP_CC) $(CPP_FLAGS) -o $@ -c lib/btc/encode/src/hex.cpp
+
+CORE_OBJS += $(OBJ_DIR)/btc.encode.hex.o
+
 # == Core Library ==
 
-$(LIB_DIR)/btc.a: $(CORE_OBJS)
+$(LIB_DIR)/libbtc.a: $(CORE_OBJS)
 	@echo "[ AR ] $@"
 	@rm -f $@
 	@mkdir -p $(LIB_DIR)
 	@$(AR) rsc $@ $(CORE_OBJS)
+
+# == Core Test Objects ==
+
+CORE_TEST_OBJS =
+
+$(TEST_OBJ_DIR)/btc.encode.hex.o: lib/btc/encode/test/hex.test.cpp lib/btc/encode/hex.hpp
+	@echo "[ CX ] $@"
+	@mkdir -p $(TEST_OBJ_DIR)
+	@$(CPP_CC) $(CPP_FLAGS) -o $@ -c lib/btc/encode/test/hex.test.cpp
+
+CORE_TEST_OBJS += $(TEST_OBJ_DIR)/btc.encode.hex.o
+
+# == Core Test Executable ==
+
+$(BIN_DIR)/btc.test.exe: $(LIB_DIR)/libbtc.a lib/btc/test/main.cpp $(CORE_TEST_OBJS)
+	@echo "[ CX ] $@"
+	@mkdir -p $(BIN_DIR)
+	@$(CPP_CC) $(CPP_FLAGS) -o $@ lib/btc/test/main.cpp $(CORE_TEST_OBJS) -lbtc -lcrypto -lgtest
