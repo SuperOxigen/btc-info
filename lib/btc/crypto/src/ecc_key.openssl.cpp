@@ -273,7 +273,6 @@ bool EccNativeKey::InitFromScalar(const std::vector<uint8_t> &ecc_scalar) {
 }
 
 std::vector<uint8_t> EccNativeKey::SerializeSubjectPublicKeyInfo() const {
-  LOG_ERROR("Not implemented");
   EvpKeyPointer pkey = EVP_PKEY_new();
   if (!pkey) {
     LOG_ERROR("Failed to allocate EVP_PKEY");
