@@ -12,6 +12,8 @@ const char *DigestAlgorithmToString(DigestAlgorithm algorithm) {
   switch (algorithm) {
     case kSha256:
       return "SHA-256";
+    case kRipeMd160:
+      return "RIPEMD-160";
     case kSha256Sha256:
       return "SHA-256-SHA-256";
     case kSha256RipeMd160:
@@ -28,6 +30,8 @@ std::vector<uint8_t> Digest(
   switch (algorithm) {
     case kSha256:
       return Sha256(data, data_size);
+    case kRipeMd160:
+      return RipeMd160(data, data_size);
     case kSha256Sha256:
       return Sha256Sha256(data, data_size);
     case kSha256RipeMd160:
@@ -44,6 +48,8 @@ std::vector<uint8_t> Digest(
   switch (algorithm) {
     case kSha256:
       return Sha256(data);
+    case kRipeMd160:
+      return RipeMd160(data);
     case kSha256Sha256:
       return Sha256Sha256(data);
     case kSha256RipeMd160:
@@ -60,6 +66,8 @@ std::vector<uint8_t> Digest(
   switch (algorithm) {
     case kSha256:
       return Sha256(data);
+    case kRipeMd160:
+      return RipeMd160(data);
     case kSha256Sha256:
       return Sha256Sha256(data);
     case kSha256RipeMd160:

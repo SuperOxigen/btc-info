@@ -191,6 +191,31 @@ std::vector<uint8_t> Sha256(const std::vector<uint8_t> &data) {
   return DigestImpl<SHA256, kSha256DigestLength>(data);
 }
 
+// RIPEMD-160
+
+bool RipeMd160(const uint8_t *data, size_t data_size, uint8_t *digest) {
+  return DigestImpl<RIPEMD160>(data, data_size, digest);
+}
+
+bool RipeMd160(const std::string &data, uint8_t *digest) {
+  return DigestImpl<RIPEMD160>(data, digest);
+}
+bool RipeMd160(const std::vector<uint8_t> &data, uint8_t *digest) {
+  return DigestImpl<RIPEMD160>(data, digest);
+}
+
+std::vector<uint8_t> RipeMd160(const uint8_t *data, size_t data_size) {
+  return DigestImpl<RIPEMD160, kRipeMd160DigestLength>(data, data_size);
+}
+
+std::vector<uint8_t> RipeMd160(const std::string &data) {
+  return DigestImpl<RIPEMD160, kRipeMd160DigestLength>(data);
+}
+
+std::vector<uint8_t> RipeMd160(const std::vector<uint8_t> &data) {
+  return DigestImpl<RIPEMD160, kRipeMd160DigestLength>(data);
+}
+
 // SHA-256-SHA-256
 
 bool Sha256Sha256(const uint8_t *data, size_t data_size, uint8_t *digest) {

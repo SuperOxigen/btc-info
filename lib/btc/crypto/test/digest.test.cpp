@@ -56,6 +56,45 @@ TEST(DigestTest, Sha256) {
   EXPECT_EQ(digest, kHelloDigest);
 }
 
+TEST(DigestTest, RipeMd160) {
+  // RIPEMD-160 with no input.
+  const std::vector<uint8_t> kEmptyDigest =
+      HexDecode("9c1185a5c5e9fc54612808977ee8f548b2258d31");
+
+  std::vector<uint8_t> digest(kRipeMd160DigestLength, 0);
+  EXPECT_TRUE(RipeMd160(nullptr, 0, digest.data()));
+  EXPECT_EQ(digest, kEmptyDigest);
+
+  digest.assign(kRipeMd160DigestLength, 0);
+  EXPECT_TRUE(RipeMd160(kEmptyString, digest.data()));
+  EXPECT_EQ(digest, kEmptyDigest);
+
+  digest.assign(kRipeMd160DigestLength, 0);
+  EXPECT_TRUE(RipeMd160(kEmptyVector, digest.data()));
+  EXPECT_EQ(digest, kEmptyDigest);
+
+  digest = RipeMd160(nullptr, 0);
+  EXPECT_EQ(digest, kEmptyDigest);
+
+  digest = RipeMd160(kEmptyString);
+  EXPECT_EQ(digest, kEmptyDigest);
+
+  digest = RipeMd160(kEmptyVector);
+  EXPECT_EQ(digest, kEmptyDigest);
+
+  // RIPEMD-160 of "abc"
+  const std::vector<uint8_t> kAbcDigest =
+      HexDecode("8eb208f7e05d987a9b044a8e98c6b087f15a0bfc");
+  digest = RipeMd160("abc");
+  EXPECT_EQ(digest, kAbcDigest);
+
+  // RIPEMD-160 of "a-z"
+  const std::vector<uint8_t> kAlphabetDigest =
+      HexDecode("f71c27109c692c1b56bbdceb5b9d2865b3708dbc");
+  digest = RipeMd160("abcdefghijklmnopqrstuvwxyz");
+  EXPECT_EQ(digest, kAlphabetDigest);
+}
+
 TEST(DigestTest, Sha256Sha256) {
   // SHA-256-SHA-256 with no input.
   const std::vector<uint8_t> kEmptyDigest = HexDecode(
