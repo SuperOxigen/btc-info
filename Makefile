@@ -76,6 +76,17 @@ $(OBJ_DIR)/btc.encode.hex.o: lib/btc/encode/src/hex.cpp lib/btc/encode/hex.hpp
 
 CORE_OBJS += $(OBJ_DIR)/btc.encode.hex.o
 
+$(OBJ_DIR)/btc.encode.base58.o: lib/btc/encode/src/base58.cpp lib/btc/encode/src/base58.openssl.cpp lib/btc/encode/base58.hpp
+	@mkdir -p $(OBJ_DIR)
+	@echo "[ CX ] $(OBJ_DIR)/btc.encode.base58.common.o"
+	@$(CPP_CC) $(CPP_FLAGS) -o $(OBJ_DIR)/btc.encode.base58.common.o -c lib/btc/encode/src/base58.cpp
+	@echo "[ CX ] $(OBJ_DIR)/btc.encode.base58.openssl.o"
+	@$(CPP_CC) $(CPP_FLAGS) -o $(OBJ_DIR)/btc.encode.base58.openssl.o -c lib/btc/encode/src/base58.openssl.cpp
+	@echo "[ LD ] $@"
+	@ld -relocatable $(OBJ_DIR)/btc.encode.base58.*.o -o $@
+
+CORE_OBJS += $(OBJ_DIR)/btc.encode.base58.o
+
 # Cryptography
 
 $(OBJ_DIR)/btc.crypto.digest.o: lib/btc/crypto/src/digest.cpp lib/btc/crypto/src/digest.openssl.cpp lib/btc/crypto/digest.hpp
@@ -121,6 +132,13 @@ $(TEST_OBJ_DIR)/btc.encode.hex.o: lib/btc/encode/test/hex.test.cpp lib/btc/encod
 	@$(CPP_CC) $(CPP_FLAGS) -o $@ -c lib/btc/encode/test/hex.test.cpp
 
 CORE_TEST_OBJS += $(TEST_OBJ_DIR)/btc.encode.hex.o
+
+$(TEST_OBJ_DIR)/btc.encode.base58.o: lib/btc/encode/test/base58.test.cpp lib/btc/encode/base58.hpp
+	@echo "[ CX ] $@"
+	@mkdir -p $(TEST_OBJ_DIR)
+	@$(CPP_CC) $(CPP_FLAGS) -o $@ -c lib/btc/encode/test/base58.test.cpp
+
+CORE_TEST_OBJS += $(TEST_OBJ_DIR)/btc.encode.base58.o
 
 $(TEST_OBJ_DIR)/btc.crypto.digest.o: lib/btc/crypto/test/digest.test.cpp lib/btc/crypto/digest.hpp
 	@echo "[ CX ] $@"
