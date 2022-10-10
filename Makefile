@@ -114,6 +114,15 @@ $(OBJ_DIR)/btc.crypto.digester.o: lib/btc/crypto/src/digester.openssl.cpp lib/bt
 
 CORE_OBJS += $(OBJ_DIR)/btc.crypto.digester.o
 
+# Wallet
+
+$(OBJ_DIR)/btc.wallet.address.o: lib/btc/wallet/src/address.cpp lib/btc/wallet/address.hpp
+	@mkdir -p $(OBJ_DIR)
+	@echo "[ CX ] $(OBJ_DIR)/btc.wallet.address.o"
+	@$(CPP_CC) $(CPP_FLAGS) -o $(OBJ_DIR)/btc.wallet.address.o -c lib/btc/wallet/src/address.cpp
+
+CORE_OBJS += $(OBJ_DIR)/btc.wallet.address.o
+
 # == Core Library ==
 
 $(LIB_DIR)/libbtc.a: $(CORE_OBJS)
@@ -160,6 +169,13 @@ $(TEST_OBJ_DIR)/btc.crypto.digester.o: lib/btc/crypto/test/digester.test.cpp lib
 	@$(CPP_CC) $(CPP_FLAGS) -o $@ -c lib/btc/crypto/test/digester.test.cpp
 
 CORE_TEST_OBJS += $(TEST_OBJ_DIR)/btc.crypto.digester.o
+
+$(TEST_OBJ_DIR)/btc.wallet.address.o: lib/btc/wallet/test/address.test.cpp lib/btc/wallet/address.hpp
+	@echo "[ CX ] $@"
+	@mkdir -p $(TEST_OBJ_DIR)
+	@$(CPP_CC) $(CPP_FLAGS) -o $@ -c lib/btc/wallet/test/address.test.cpp
+
+CORE_TEST_OBJS += $(TEST_OBJ_DIR)/btc.wallet.address.o
 
 # == Core Test Executable ==
 
